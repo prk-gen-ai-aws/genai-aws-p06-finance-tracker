@@ -1,0 +1,37 @@
+# Credentials & secrets
+.env
+**/.env
+*.pem
+*.key
+
+# CloudFormation
+**/parameters.json
+
+# Lambda build artifacts
+**/lambda/package/
+**/lambda/*.zip
+
+# AgentCore
+agentcore/.env.local
+agentcore/cdk/node_modules/
+agentcore/cdk/cdk.out/
+agentcore/cdk/dist/
+agentcore/.cli/logs/
+agentcore/.cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# OS & editor
+.DS_Store
+.vscode/settings.json
+*.swp
+.idea/
+
+# Outputs
+**/outputs.txt
