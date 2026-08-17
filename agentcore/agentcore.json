@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.agentcore.aws.dev/v1/agentcore.json",
+  "name": "p06FinanceTracker",
+  "version": 1,
+  "managedBy": "CDK",
+  "tags": {
+    "agentcore:created-by": "agentcore-cli",
+    "agentcore:project-name": "FinanceTracker"
+  },
+  "runtimes": [
+    {
+      "name": "p06FinanceTracker",
+      "build": "CodeZip",
+      "entrypoint": "main.py",
+      "codeLocation": "ph1/agent/",
+      "runtimeVersion": "PYTHON_3_12",
+      "networkMode": "PUBLIC",
+      "protocol": "HTTP",
+      "environmentVariables": {
+        "AGENTCORE_MEMORY_ID": "p06FinanceTrackerMemory-WfrQzfDyWb",
+        "AWS_REGION": "us-east-1"
+      }
+    }
+  ],
+  "memories": [],
+  "knowledgeBases": [],
+  "credentials": [],
+  "evaluators": [],
+  "onlineEvalConfigs": [],
+  "agentCoreGateways": [],
+  "policyEngines": [],
+  "configBundles": [],
+  "abTests": [],
+  "harnesses": [],
+  "datasets": [],
+  "payments": []
+}

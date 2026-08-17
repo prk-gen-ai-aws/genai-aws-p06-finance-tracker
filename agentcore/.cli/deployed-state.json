@@ -1,0 +1,17 @@
+{
+  "targets": {
+    "default": {
+      "resources": {
+        "runtimes": {
+          "p06FinanceTracker": {
+            "runtimeId": "p06FinanceTracker_p06FinanceTracker-YPgGfK2bhQ",
+            "runtimeArn": "arn:aws:bedrock-agentcore:us-east-1:759802535955:runtime/p06FinanceTracker_p06FinanceTracker-YPgGfK2bhQ",
+            "roleArn": "arn:aws:iam::759802535955:role/AgentCore-p06FinanceTrack-ApplicationAgentP06Financ-AFrEbgmfSBec"
+          }
+        },
+        "stackName": "AgentCore-p06FinanceTracker-default",
+        "deployHash": "f555f2cf0b9f7a54"
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ from strands import Agent
 from strands.models.bedrock import BedrockModel
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 from bedrock_agentcore.memory import MemoryClient
-from bedrock_agentcore.memory.integrations.strands.config import AgentCoreMemoryConfig
+from bedrock_agentcore.memory.integrations.strands.config import AgentCoreMemoryConfig, RetrievalConfig
 from bedrock_agentcore.memory.integrations.strands.session_manager import AgentCoreMemorySessionManager
 from dotenv import load_dotenv
 
@@ -93,7 +93,17 @@ def agent_factory():
         memory_config = AgentCoreMemoryConfig(
             memory_id=MEMORY_ID,
             session_id=session_id,
-            actor_id=ACTOR_ID
+            actor_id=ACTOR_ID,
+            retrieval_config={
+                f"/preferences/{ACTOR_ID}/": RetrievalConfig(
+                    top_k=5,
+                    relevance_score=0.5
+                ),
+                f"/summaries/{ACTOR_ID}/{session_id}/": RetrievalConfig(
+                    top_k=5,
+                    relevance_score=0.5
+                )
+            }
         )
         session_manager = AgentCoreMemorySessionManager(
             agentcore_memory_config=memory_config,
@@ -130,13 +140,22 @@ async def invoke(payload, context):
     agent = get_or_create_agent(session_id)
     prompt = _extract_prompt(payload)
 
-    async for event in agent.stream_async(prompt):
-        if not isinstance(event, dict) or "event" not in event:
-            continue
-        cbs = event["event"].get("contentBlockStart")
-        if cbs is not None and not cbs.get("start"):
-            continue
-        yield event
+    try:
+        async for event in agent.stream_async(prompt):
+            if not isinstance(event, dict) or "event" not in event:
+                continue
+            cbs = event["event"].get("contentBlockStart")
+            if cbs is not None and not cbs.get("start"):
+                continue
+            yield event
+    finally:
+        # Flush memory events to trigger long-term strategy extraction
+        try:
+            session_manager = agent.conversation_manager
+            if hasattr(session_manager, 'close'):
+                await session_manager.close()
+        except Exception as e:
+            log.warning(f"Memory flush warning: {e}")
 
 
 # ── Local development entry point ──
