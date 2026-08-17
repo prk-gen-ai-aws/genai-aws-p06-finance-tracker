@@ -1,0 +1,16 @@
+[project]
+name = "p06-finance-tracker-agent"
+version = "0.1.0"
+description = "Personal Finance Tracker Agent — Strands + AgentCore Memory"
+requires-python = ">=3.12"
+dependencies = [
+    "strands-agents>=1.0.0",
+    "strands-agents-tools>=0.1.0",
+    "bedrock-agentcore>=0.1.0",
+    "boto3>=1.38.0",
+    "python-dotenv>=1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
