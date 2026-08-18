@@ -97,11 +97,15 @@ def agent_factory():
             retrieval_config={
                 f"/preferences/{ACTOR_ID}/": RetrievalConfig(
                     top_k=5,
-                    relevance_score=0.5
+                    relevance_score=0.3
                 ),
                 f"/summaries/{ACTOR_ID}/{session_id}/": RetrievalConfig(
                     top_k=5,
-                    relevance_score=0.5
+                    relevance_score=0.3
+                ),
+                f"/users/{ACTOR_ID}/facts": RetrievalConfig(
+                    top_k=3,
+                    relevance_score=0.3
                 )
             }
         )
