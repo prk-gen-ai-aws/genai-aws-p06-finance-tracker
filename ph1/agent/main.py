@@ -99,11 +99,11 @@ def agent_factory():
                     top_k=5,
                     relevance_score=0.5
                 ),
-                f"/preferences/{ACTOR_ID}/": RetrievalConfig(
+                f"/finance/{ACTOR_ID}/": RetrievalConfig(
                     top_k=5,
-                    relevance_score=0.45
+                    relevance_score=0.5
                 ),
-                f"/facts/{ACTOR_ID}/": RetrievalConfig(
+                f"/preferences/{ACTOR_ID}/": RetrievalConfig(
                     top_k=5,
                     relevance_score=0.45
                 )
