@@ -198,7 +198,7 @@ Expected .env content after all steps:
         description="Personal finance tracker memory",
         strategies=[
             {
-                "summaryMemoryStrategy": {     # SUMMARIZATION strategy
+                "summaryMemoryStrategy": {
                     "name": "SpendingSummarizer",
                     "namespaceTemplates": ["/summaries/{actorId}/{sessionId}/"]
                 }
@@ -223,7 +223,7 @@ Verify memory was created successfully:
 
     python3 -c "
     from bedrock_agentcore.memory import MemoryClient
-    status = MemoryClient(region_name='us-east-1').get_memory_status(memory_id='YOUR_MEMORY_ID')
+    status = MemoryClient(region_name='us-east-1').get_memory_status(memory_id='YOUR_MEMORY_ID')  # replace YOUR_MEMORY_ID
     print(f'Memory status: {status}')
     "
     # Expected output: Memory status: ACTIVE
@@ -290,7 +290,7 @@ Edit agentcore/agentcore.json — update the runtimes section only. Keep all oth
         "networkMode": "PUBLIC",
         "protocol": "HTTP",
         "environmentVariables": {
-          "AGENTCORE_MEMORY_ID": "your-memory-id",
+          "AGENTCORE_MEMORY_ID": "p06FinanceTrackerMemory-xxxxxxxxxx",
           "AWS_REGION": "us-east-1"
         }
       }]
@@ -326,8 +326,8 @@ YOUR_ACCOUNT_ID with your 12-digit account ID, and YOUR_MEMORY_ID with your memo
 Get Runtime ARN and add to .env:
 
     agentcore status
-    # Copy the Runtime ARN from output, then:
-    echo "AGENTCORE_RUNTIME_ARN=your-runtime-arn" >> .env
+    # Copy the Runtime ARN from output, then replace the value below:
+    echo "AGENTCORE_RUNTIME_ARN=arn:aws:bedrock-agentcore:us-east-1:YOUR_ACCOUNT_ID:runtime/p06FinanceTracker_p06FinanceTracker-xxxxxxxxxx" >> .env
 
 Run the app:
 
